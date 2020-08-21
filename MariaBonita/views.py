@@ -16,6 +16,7 @@ from django.templatetags.static import  static
 from django.urls import reverse
 from . models import Productos, Categoria
 from . import forms
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 class Resultados(RedirectView):
@@ -151,3 +152,10 @@ class VistaDesconectar(RedirectView):
     def post(self, request, *args, **kwargs):
         logout(request)
         return HttpResponseRedirect(reverse('mariabonita:index'))
+
+
+class VistaCarritoCompras(LoginRequiredMixin,RedirectView):
+    url = 'Tienda:acceso'
+
+    def get(self, request, *args, **kwargs):
+        return render(request,'mariabonita/carritoCompras.html',{})

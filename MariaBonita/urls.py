@@ -14,7 +14,7 @@ urlpatterns = [
     path('activacion/<uidb64>/<token>/',views.VistaActivacionCuenta.as_view(), name='activacion'),
     path('acceso/',views.VistaAcceso.as_view(), name='acceso'),
     path('desconectar/',views.VistaDesconectar.as_view(),name='desconectar'),
-    
+    path('carrito/',views.VistaCarritoCompras.as_view(),name='carritoCompras'),
 ]
 
 urlpatterns += [
