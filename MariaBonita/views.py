@@ -14,7 +14,7 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from django.templatetags.static import  static
 from django.urls import reverse
-from . models import Productos, Categoria
+from . models import Productos, Categoria,CarritoCompras,CestaCarrito
 from . import forms
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -159,3 +159,19 @@ class VistaCarritoCompras(LoginRequiredMixin,RedirectView):
 
     def get(self, request, *args, **kwargs):
         return render(request,'mariabonita/carritoCompras.html',{})
+
+    def post(self, request, *args, **kwargs):
+        try:
+            ajax = request.POST['metodoEnvio']
+        except
+            ajax = None
+
+        try:
+            tmpCarrito =CarritoCompras.objects.get(propietario=request.user.pk)
+        except CarritoCompras.DoesNotExist:
+            tmpCarrito = CarritoCompras()
+            tmpCarrito.propietario = User.objects.get(pk=request.user.pk)
+            tmpCarrito.save()
+
+        if ajax is not None:
+            if request.POST['accion'] == 'agregar':
