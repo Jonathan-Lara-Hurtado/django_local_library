@@ -6,7 +6,7 @@
     {% load static %}
     <link rel="icon" href="{% static 'MariaBonita/recursos/images/icono.png' %}" sizes="32x32" type="image/png">
     <meta charset="UTF-8"​>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block titulo %}{% endblock %}</title>    
     <link rel="stylesheet" type="text/css" href="{% static 'MariaBonita/bootstrap/css/bootstrap.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'MariaBonita/recursos/css/mariabonita.css' %}">
@@ -15,7 +15,7 @@
     <script src="{% static 'MariaBonita/bootstrap/js/bootstrap.min.js' %} "></script>
 
 <body style="background-image: url('{% static 'MariaBonita/recursos/images/fondoBody.jpg' %}');">
-    <nav class="navbar navbar-expand-md navbar-light py-lg-4" id="navPrincipal">
+    <nav class="navbar navbar-expand-lg navbar-light" id="navPrincipal">
         <a class="navbar-brand" href="{% url 'mariabonita:index' %}">
             <img src="{% static 'MariaBonita/recursos/images/logo.jpg' %}" height="80" width="100">
         </a>
@@ -38,16 +38,30 @@
 
                 {% else %}
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item {% if request.path == '/' %} active {% endif %} px-lg-3">
-                            <a class="nav-link text-uppercase text-expanded" href="{% url 'mariabonita:index' %}">{% trans 'Inicio' %}</a>
+                        <li class="nav-item {% if request.path == '/' %} active {% endif %} ">
+                            <a class="nav-link text-uppercase" href="{% url 'mariabonita:index' %}">{% trans 'Inicio' %}</a>
                         </li>
-                        <li class="nav-item {% if request.path == '/productos' %} active {% endif %} px-lg-3">
-                            <a class="nav-link text-uppercase text-expanded " href="{% url 'mariabonita:productos' %}">{% trans 'Productos' %}</a>
+                        <li class="nav-item {% if request.path == '/productos' %} active {% endif %} ">
+                            <a class="nav-link text-uppercase" href="{% url 'mariabonita:productos' %}">{% trans 'Productos' %}</a>
                         </li>
-                        <li class="nav-item {% if request.path == '/categorias' %} active {% endif %} px-lg-3">
-                            <a class="nav-link text-uppercase text-expanded " href="{% url 'mariabonita:categorias' %}">{% trans 'Categorías' %}</a>
+                        <li class="nav-item {% if request.path == '/categorias' %} active {% endif %}">
+                            <a class="nav-link text-uppercase" href="{% url 'mariabonita:categorias' %}">{% trans 'Categorías' %}</a>
+                        </li>
+
+                    </ul>
+
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active {% if request.path == '/registro' %} active {% endif %}" >
+                            <a class="nav-link">Bienvenido</a>
+                        </li>
+                        <li class="nav-item active {% if request.path == '/registro' %} active {% endif %}" >
+                            <a class="nav-link" href="{% url 'mariabonita:registro' %}">Registro</a>
+                        </li>
+                        <li class="nav-item{% if request.path == '/acceso' %} active {% endif %}">
+                            <a class="nav-link" href="{% url 'mariabonita:acceso' %}">Iniciar Sesión</a>
                         </li>
                     </ul>
+
 
                 {% endif %}
         </div>
