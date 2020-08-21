@@ -91,7 +91,8 @@ class Registro(RedirectView):
             correo = EmailMessage(correoAsunto,mensaje,to=[destinatario])
             correo.content_subtype ='html'
             correo.send()
-            return HttpResponse("mariabonita/redireccionamiento.html")
+            paginaRedireccionamiento  = render_to_string("mariabonita/redireccionamiento.html",{'respuesta': 'Active su cuenta al enlace que hemos enviado','vistaURL': 'mariabonita:acceso'})
+            return HttpResponse(paginaRedireccionamiento)
         else:
             return render(request, "mariabonita/registro.html", {'formularioRegistro': formularioRegistro})
 
