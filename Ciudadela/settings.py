@@ -29,11 +29,15 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'gihDpILPOd+STBSVUDGdLtcH0PI6Pl
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
+HEROKU = False
 
-ALLOWED_HOSTS = [
-   'intense-everglades-71354.herokuapp.com',
-   #'127.0.0.1:8000',
-]
+if HEROKU:
+    ALLOWED_HOSTS = [
+    'intense-everglades-71354.herokuapp.com',
+    #'127.0.0.1:8000',
+    ]
+else:
+    ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -81,27 +85,35 @@ TEMPLATES = [
 WSGI_APPLICATION = 'Ciudadela.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        #'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'NAME': 'principal',
-        'USER': 'postgres',
-        'PASSWORD': '12345',
-        'HOST': '127.0.0.1',
-        'DATABASE_PORT': '5432',
+if HEROKU:
+    # Database
+    # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
+
+    DATABASES = {
+        'default': {
+            #'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            'NAME': 'principal',
+            'USER': 'postgres',
+            'PASSWORD': '12345',
+            'HOST': '127.0.0.1',
+            'DATABASE_PORT': '5432',
+        }
     }
-}
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+    DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
-DATABASE_URL = os.environ['DATABASE_URL']
+    DATABASE_URL = os.environ['DATABASE_URL']
 
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-
+    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
