@@ -40,7 +40,7 @@ class Index(RedirectView):
 
 class Producto(RedirectView):
     productos = Productos.objects.all()
-
+    print(productos)
     def get(self, request, *args, **kwargs):
         return render(request, "mariabonita/productos.html", {"productos": self.productos})
     
@@ -155,7 +155,7 @@ class VistaDesconectar(RedirectView):
 
 
 class VistaCarritoCompras(LoginRequiredMixin,RedirectView):
-    url = 'Tienda:acceso'
+    url = 'mariabonita:acceso'
 
     def get(self, request, *args, **kwargs):
         return render(request,'mariabonita/carritoCompras.html',{})

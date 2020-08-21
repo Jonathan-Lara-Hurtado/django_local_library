@@ -23,7 +23,10 @@ Productos
                     <p class="card-text">Precio: $ {{producto.precio}}</p>
                     <p class="card-text">Codigo: {{producto.codigo}}</p>
                     <p class="card-text">Descripcion: {{producto.descripcion}}</p>
+
                 </div>
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" name="cantidad" min="1" max="20" id="cantidad" value="1">
 
                 <div class="card-footer">
                     <a href="#" class="btn btn-success">Añadir a Carrito</a>

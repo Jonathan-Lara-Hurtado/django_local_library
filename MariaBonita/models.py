@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 
 class Categoria(models.Model):
@@ -27,3 +27,23 @@ class Cliente(models.Model):
     telefono = models.CharField(max_length=12)
     email = models.EmailField()
     fechaNacimiento = models.DateField()
+
+
+
+
+class CarritoCompras(models.Model):
+    propietario = models.ForeignKey(User,on_delete=models.CASCADE)
+
+class CestaCarrito(models.Model):
+    fkCarritoCompras = models.ForeignKey(CarritoCompras,on_delete=models.CASCADE)
+    fkProducto = models.ForeignKey(Productos,on_delete=models.CASCADE)
+    cantidad = models.IntegerField(default=1)
+
+    def save(self, *args, **kwargs):
+        try:
+            tmpCesta = CestaCarrito.objects.get(fkCarritoCompras=self.fkCarrito, fkProducto=self.fkProducto)
+            self.id = tmpCesta.pk
+            self.cantidad += tmpCesta.cantidad
+            return super(Cesta, self).save(*args, **kwargs)
+        except:
+            return super(Cesta, self).save(*args, **kwargs)
