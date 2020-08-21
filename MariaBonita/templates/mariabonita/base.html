@@ -16,70 +16,62 @@
 
 <body style="background-image: url('{% static 'MariaBonita/recursos/images/fondoBody.jpg' %}');">
     <nav class="navbar navbar-expand-lg navbar-light py-lg-4" id="navPrincipal">
-        <div>
-            <a class="navbar-brand" href="{% url 'mariabonita:index' %}">
-                <img src="{% static 'MariaBonita/recursos/images/logo.jpg' %}" height="80" width="100">
-            </a>
-        </div>
-
-        <form class="form-inline" action="/resultados/">
-            <input class="form-control mr-sm-2" type="text" placeholder="Buscar" aria-label="Búsqueda" name="buscar">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-        </form>
-
-        {% if user.is_authenticated %}
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav mx-auto">
-                <li class="nav-item {% if request.path == '/' %} active {% endif %} px-lg-3">
-                    <a class="nav-link text-uppercase text-expanded navbar-brand" href="{% url 'mariabonita:index' %}">{% trans 'Inicio' %}</a>
-                </li>
-
-                <li class="nav-item {% if request.path == '/productos' %} active {% endif %} px-lg-3">
-                    <a class="nav-link text-uppercase text-expanded navbar-brand" href="{% url 'mariabonita:productos' %}">{% trans 'Productos' %}</a>
-                </li>
-
-                <li class="nav-item {% if request.path == '/categorias' %} active {% endif %} px-lg-3">
-                    <a class="nav-link text-uppercase text-expanded navbar-brand" href="{% url 'mariabonita:categorias' %}">{% trans 'Categorías' %}</a>
-                </li>
-                <li>
-                    <a class="nav-item">Bienvenido <br>{{ user.first_name }}</br></a>
-                </li>
-                <li class="nav-item active {% if request.path == '/desconectar' %} active {% endif %} px-lg-3">
-                    <a class="nav-link" href="{% url 'mariabonita:desconectar' %}">Cerrar Sesión <span class="sr-only">(current)</span></a>
-                </li>
-            </ul>
-            {% else %}
-            <div>
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item {% if request.path == '/' %} active {% endif %} px-lg-3">
-                        <a class="nav-link text-uppercase text-expanded navbar-brand" href="{% url 'mariabonita:index' %}">{% trans 'Inicio' %}</a>
-                    </li>
-    
-                    <li class="nav-item {% if request.path == '/productos' %} active {% endif %} px-lg-3">
-                        <a class="nav-link text-uppercase text-expanded navbar-brand" href="{% url 'mariabonita:productos' %}">{% trans 'Productos' %}</a>
-                    </li>
-    
-                    <li class="nav-item {% if request.path == '/categorias' %} active {% endif %} px-lg-3">
-                        <a class="nav-link text-uppercase text-expanded navbar-brand" href="{% url 'mariabonita:categorias' %}">{% trans 'Categorías' %}</a>
-                    </li>
-                    <li>
-                        <a class="nav-item">Bienvenido</br></a>
-                    </li>
-                    <li class="nav-item active {% if request.path == '/registro' %} active {% endif %} px-lg-3" >
-                        <a class="nav-link" href="{% url 'mariabonita:registro' %}">Registro<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item active {% if request.path == '/acceso' %} active {% endif %} px-lg-3">
-                        <a class="nav-link" href="{% url 'mariabonita:acceso' %}">Iniciar Sesión<span class="sr-only">(current)</span></a>
-                    </li>
-                </ul>
-            </div>
-            {% endif %}
-        </div>
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+        <a class="navbar-brand" href="{% url 'mariabonita:index' %}">
+            <img src="{% static 'MariaBonita/recursos/images/logo.jpg' %}" height="80" width="100">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
         </button>
 
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <form class="form-inline" action="/resultados/">
+            <input class="form-control mr-sm-2" type="text" placeholder="Buscar" aria-label="Búsqueda" name="buscar">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+            </form>
+                {% if user.is_authenticated %}
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item {% if request.path == '/' %} active {% endif %} px-lg-3">
+                            <a class="nav-link text-uppercase text-expanded navbar-brand" href="{% url 'mariabonita:index' %}">{% trans 'Inicio' %}</a>
+                        </li>
+
+                        <li class="nav-item {% if request.path == '/productos' %} active {% endif %} px-lg-3">
+                            <a class="nav-link text-uppercase text-expanded navbar-brand" href="{% url 'mariabonita:productos' %}">{% trans 'Productos' %}</a>
+                        </li>
+                        <li class="nav-item {% if request.path == '/categorias' %} active {% endif %} px-lg-3">
+                            <a class="nav-link text-uppercase text-expanded navbar-brand" href="{% url 'mariabonita:categorias' %}">{% trans 'Categorías' %}</a>
+                        </li>
+                        <li>
+                            <a class="nav-item">Bienvenido <br>{{ user.first_name }}</br></a>
+                        </li>
+                        <li class="nav-item active {% if request.path == '/desconectar' %} active {% endif %} px-lg-3">
+                            <a class="nav-link" href="{% url 'mariabonita:desconectar' %}">Cerrar Sesión <span class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
+                {% else %}
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item {% if request.path == '/' %} active {% endif %} px-lg-3">
+                            <a class="nav-link text-uppercase text-expanded navbar-brand" href="{% url 'mariabonita:index' %}">{% trans 'Inicio' %}</a>
+                        </li>
+                        <li class="nav-item {% if request.path == '/productos' %} active {% endif %} px-lg-3">
+                            <a class="nav-link text-uppercase text-expanded navbar-brand" href="{% url 'mariabonita:productos' %}">{% trans 'Productos' %}</a>
+                        </li>
+                        <li class="nav-item {% if request.path == '/categorias' %} active {% endif %} px-lg-3">
+                            <a class="nav-link text-uppercase text-expanded navbar-brand" href="{% url 'mariabonita:categorias' %}">{% trans 'Categorías' %}</a>
+                        </li>
+                        <li>
+                            <a class="nav-item">Bienvenido</br></a>
+                        </li>
+                        <li class="nav-item active {% if request.path == '/registro' %} active {% endif %} px-lg-3" >
+                            <a class="nav-link" href="{% url 'mariabonita:registro' %}">Registro<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item active {% if request.path == '/acceso' %} active {% endif %} px-lg-3">
+                            <a class="nav-link" href="{% url 'mariabonita:acceso' %}">Iniciar Sesión<span class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
+                {% endif %}
+            
+
+        </div>
     </nav>
 
 <p>
