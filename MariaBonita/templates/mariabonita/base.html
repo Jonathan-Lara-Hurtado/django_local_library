@@ -35,7 +35,25 @@
             </form>
 
                 {% if user.is_authenticated %}
-
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item {% if request.path == '/' %} active {% endif %} ">
+                            <a class="nav-link text-uppercase" href="{% url 'mariabonita:index' %}">{% trans 'Inicio' %}</a>
+                        </li>
+                        <li class="nav-item {% if request.path == '/productos' %} active {% endif %} ">
+                            <a class="nav-link text-uppercase" href="{% url 'mariabonita:productos' %}">{% trans 'Productos' %}</a>
+                        </li>
+                        <li class="nav-item {% if request.path == '/categorias' %} active {% endif %}">
+                            <a class="nav-link text-uppercase" href="{% url 'mariabonita:categorias' %}">{% trans 'Categorías' %}</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                        <li>
+                            <a class="nav-item">Bienvenido <br>{{ user.first_name }}</br></a>
+                        </li>
+                        <li class="nav-item {% if request.path == '/desconectar' %} active {% endif %}">
+                            <a class="nav-link" href="{% url 'mariabonita:desconectar' %}">Cerrar Sesión</a>
+                        </li>
+                    </ul>
                 {% else %}
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item {% if request.path == '/' %} active {% endif %} ">
