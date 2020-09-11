@@ -158,29 +158,32 @@ LOCALE_PATHS = (
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/static/'
-MEDIA_ROOT = 'mariabonita.s3.us-east-2.amazonaws.com/'
-MEDIA_URL = '/media/'
 
-STATICFILES_DIRS = (
-    os.path.join('static'),
-)
+if HEROKU:
+    STATIC_ROOT = 'mariabonita.s3.us-east-2.amazonaws.com/'
+    STATIC_URL = '/static/'
+    MEDIA_ROOT = 'mariabonita.s3.us-east-2.amazonaws.com/'
+    MEDIA_URL = '/media/'
 
+    #S3 buckets configuracion'
+    AWS_ACCESS_KEY_ID = 'AKIAZDRNVCEWPVIP2M7N'
+    AWS_SECRET_ACCESS_KEY = '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'
+    AWS_STORAGE_BUCKET_NAME = 'mariabonita' 
 
-#S3 buckets configuracion'
-AWS_ACCESS_KEY_ID = 'AKIAZDRNVCEWPVIP2M7N'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'mariabonita' 
+    AWS_S3_FILE_OVERWRITE = False 
+    AWS_DEFAULT_ACL = None
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-AWS_S3_FILE_OVERWRITE = False 
-AWS_DEFAULT_ACL = None
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    #https://github.com/jschneier/django-storages/issues/687
+    AWS_S3_REGION_NAME = 'us-east-2' #change to your region
+    AWS_S3_SIGNATURE_VERSION = 's3v4'
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATIC_URL = '/static/'
+    STATIC_ROOT = os.path.join(BASE_DIR,'mediafile')
+    MEDIA_URL = '/media/'
 
-#https://github.com/jschneier/django-storages/issues/687
-AWS_S3_REGION_NAME = 'us-east-2' #change to your region
-AWS_S3_SIGNATURE_VERSION = 's3v4'
 
 #Correo
 EMAIL_USE_TLS = True
