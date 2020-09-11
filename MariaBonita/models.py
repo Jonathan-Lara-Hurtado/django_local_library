@@ -39,11 +39,16 @@ class CestaCarrito(models.Model):
     fkProducto = models.ForeignKey(Productos,on_delete=models.CASCADE)
     cantidad = models.IntegerField(default=1)
 
-    def save(self, *args, **kwargs):
+
+    def agregarCarrito(self,cantidad,*args, **kwargs):
         try:
-            tmpCesta = CestaCarrito.objects.get(fkCarritoCompras=self.fkCarrito, fkProducto=self.fkProducto)
-            self.id = tmpCesta.pk
-            self.cantidad += tmpCesta.cantidad
-            return super(Cesta, self).save(*args, **kwargs)
+            tmpCesta  = CestaCarrito.objects.get(fkCarritoCompras = self.fkCarritoCompras,fkProducto = self.fkProducto)
         except:
-            return super(Cesta, self).save(*args, **kwargs)
+            tmpCesta = None
+
+        if tmpCesta is not None:
+            tmpCesta.cantidad += cantidad
+            tmpCesta.save()
+        else:
+            self.cantidad = cantidad
+            self.save()

@@ -133,3 +133,6 @@ dmypy.json
 
 #Database
 *.sql
+MariaBonita/migrations/0011_carritocompras_cestacarrito.py
+.idea/misc.xml
+.idea/Ciudadela.iml

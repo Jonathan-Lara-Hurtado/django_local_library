@@ -163,15 +163,17 @@ class VistaCarritoCompras(LoginRequiredMixin,RedirectView):
     def post(self, request, *args, **kwargs):
         try:
             ajax = request.POST['metodoEnvio']
-        except
+        except:
             ajax = None
 
         try:
             tmpCarrito =CarritoCompras.objects.get(propietario=request.user.pk)
-        except CarritoCompras.DoesNotExist:
+        except tmpCarrito.DoesNotExist:
             tmpCarrito = CarritoCompras()
             tmpCarrito.propietario = User.objects.get(pk=request.user.pk)
             tmpCarrito.save()
 
+
         if ajax is not None:
             if request.POST['accion'] == 'agregar':
+                pass
