@@ -6,9 +6,28 @@ Inicio
 {% endblock %}
 
 {% block contenidodinamico %}
-    {% for tmp in productos%}
+    
 
-        <img src="{{tmp.imagen.url}}">
+<div class="container">
 
-    {% endfor %}
+    <div class="row">   
+        
+        {% for tmp in productos%}
+            
+                <div class="card m-4 col-md-3 p-1">
+                    <img class="card-img-top" src="{{tmp.imagen.url}}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{tmp.nombre}}</h5>
+                        <p class="card-text">{{tmp.descripcion}} </p>
+                    </div>
+                    <div class="card-footer">
+                        <a class="btn btn-primary btn-block text-white">Detalles</a>
+                    </div>
+                </div>
+            
+        {% endfor %}
+
+    </div>
+
+</div>
 {% endblock %}
