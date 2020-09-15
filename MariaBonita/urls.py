@@ -7,6 +7,7 @@ app_name = 'mariabonita'
 
 urlpatterns = [
     path('', views.Index.as_view(), name="index"),
+    path('producto/<token>',views.VistaProducto.as_view(),name="producto"),
     path('productos/', views.Producto.as_view(), name="productos"),
     path('categorias/', views.Categorias.as_view(), name="categorias"),
     path('resultados/',views.Resultados.as_view(), name="buscar"),

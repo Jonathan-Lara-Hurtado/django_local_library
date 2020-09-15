@@ -156,6 +156,20 @@ class VistaDesconectar(RedirectView):
         return HttpResponseRedirect(reverse('mariabonita:index'))
 
 
+class VistaProducto(RedirectView):
+    
+    
+    def get(self, request, *args, **kwargs):
+        try:
+            tmpProducto = Productos.objects.get(codigo=kwargs['token'])
+        except:
+            tmpProducto = None
+        
+        if tmpProducto is not None:
+            return render(request,'mariabonita/producto.html',{'producto':tmpProducto})
+        else:
+            return HttpResponseRedirect(reverse('mariabonita:index'))
+
 class VistaCarritoCompras(LoginRequiredMixin,RedirectView):
     url = 'mariabonita:acceso'
 
