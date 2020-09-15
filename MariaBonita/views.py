@@ -14,7 +14,7 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from django.templatetags.static import  static
 from django.urls import reverse
-from . models import Productos, Categoria,CarritoCompras,CestaCarrito
+from . models import Productos,Categoria,CestaCarrito,CarritoCompras
 from . import forms
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -40,7 +40,6 @@ class Index(RedirectView):
 
 class Producto(RedirectView):
     productos = Productos.objects.all()
-    print(productos)
     def get(self, request, *args, **kwargs):
         return render(request, "mariabonita/productos.html", {"productos": self.productos})
     

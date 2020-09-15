@@ -28,9 +28,6 @@ class Cliente(models.Model):
     email = models.EmailField()
     fechaNacimiento = models.DateField()
 
-
-
-
 class CarritoCompras(models.Model):
     propietario = models.ForeignKey(User,on_delete=models.CASCADE)
 

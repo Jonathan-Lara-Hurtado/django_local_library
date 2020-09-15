@@ -350,3 +350,8 @@ mediafile/admin/js/vendor/select2/i18n/zh-TW.js
 mediafile/admin/js/vendor/xregexp/LICENSE.txt
 mediafile/admin/js/vendor/xregexp/xregexp.js
 mediafile/admin/js/vendor/xregexp/xregexp.min.js
+MariaBonita/migrations/0001_initial.py
+MariaBonita/migrations/0002_productos.py
+MariaBonita/migrations/0003_cliente.py
+MariaBonita/migrations/0004_carritocompras.py
+MariaBonita/migrations/0005_cestacarrito.py
