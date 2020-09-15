@@ -23,14 +23,11 @@ from django.views.generic import RedirectView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('MariaBonita.urls')),
-]
-
-urlpatterns += [
     path('registro/', include('django.contrib.auth.urls')),
 ]
 
-urlpatterns += static(settings.DEFAULT_FILE_STORAGE, document_root = settings.MEDIA_ROOT)
 
-urlpatterns += [
-    path("",RedirectView.as_view(url='',permanent=True))
-]
+if settings.HEROKU:
+    urlpatterns += static(settings.DEFAULT_FILE_STORAGE, document_root = settings.MEDIA_ROOT)
+else:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -6,5 +6,9 @@ Inicio
 {% endblock %}
 
 {% block contenidodinamico %}
-<h1>Inicio</h1>
+    {% for tmp in productos%}
+
+        <img src="{{tmp.imagen.url}}">
+
+    {% endfor %}
 {% endblock %}

@@ -28,15 +28,17 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'gihDpILPOd+STBSVUDGdLtcH0PI6Pl
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
-DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
+
 HEROKU = False
 
 if HEROKU:
+    DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
     ALLOWED_HOSTS = [
     'intense-everglades-71354.herokuapp.com',
     #'127.0.0.1:8000',
     ]
 else:
+    DEBUG = True
     ALLOWED_HOSTS = ['*']
 
 # Application definition
@@ -181,7 +183,7 @@ if HEROKU:
 else:
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     STATIC_URL = '/static/'
-    STATIC_ROOT = os.path.join(BASE_DIR,'mediafile')
+    MEDIA_ROOT = os.path.join(BASE_DIR,'mediafile')
     MEDIA_URL = '/media/'
 
 

@@ -17,8 +17,10 @@ urlpatterns = [
     path('carrito/',views.VistaCarritoCompras.as_view(),name='carritoCompras'),
 ]
 
-urlpatterns += [
-    #path('accounts/', include('django.contrib.auth.urls')),
-]
 
-urlpatterns += static(settings.DEFAULT_FILE_STORAGE, document_root = settings.MEDIA_ROOT)
+
+if settings.HEROKU:
+    urlpatterns += [
+        #path('accounts/', include('django.contrib.auth.urls')),
+    ]
+    urlpatterns += static(settings.DEFAULT_FILE_STORAGE, document_root = settings.MEDIA_ROOT)
